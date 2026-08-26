@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import ProductCarousel from "../components/ProductCarousel.jsx";
@@ -7,6 +8,11 @@ import HeroCarousel from "../components/HeroCarousel.jsx";
 import products from "../Data/products.js";
 
 function Home() {
+
+    // Cria uma cópia dos produtos e embaralha a ordem
+    const [produtosAleatorios] = useState(() => {
+        return [...products].sort(() => Math.random() - 0.5);
+    });
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
@@ -22,8 +28,6 @@ function Home() {
                     <div className="max-w-7xl mx-auto px-6 py-16
                                     flex flex-col md:flex-row
                                     items-center justify-between gap-10">
-
-                        {/* TEXTO */}
 
                         <div className="max-w-xl">
 
@@ -58,7 +62,6 @@ function Home() {
 
                         </div>
 
-
                         {/* CARROSSEL DE FOTOS */}
 
                         <HeroCarousel products={products} />
@@ -76,30 +79,25 @@ function Home() {
                 />
 
 
-                {/* CARDS DOS PRODUTOS */}
+                {/* LISTA ALEATÓRIA */}
 
                 <section className="max-w-7xl mx-auto px-6 py-10">
 
-                    <div className="flex items-center justify-between mb-8">
+                    <div className="mb-8">
 
-                        <div>
+                        <h2 className="text-3xl font-bold text-gray-900">
+                            Nossos produtos
+                        </h2>
 
-                            <h2 className="text-3xl font-bold text-gray-900">
-                                Nossos produtos
-                            </h2>
-
-                            <p className="text-gray-500 mt-2">
-                                Confira alguns dos nossos produtos.
-                            </p>
-
-                        </div>
+                        <p className="text-gray-500 mt-2">
+                            Confira alguns dos nossos produtos.
+                        </p>
 
                     </div>
 
-
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                        {products.slice(0, 8).map((product) => (
+                        {produtosAleatorios.map((product) => (
 
                             <ProductCard
                                 key={product.id}
@@ -120,9 +118,7 @@ function Home() {
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
 
                         <div className="text-center p-5">
-                            <div className="text-3xl mb-2">
-                                🚚
-                            </div>
+                            <div className="text-3xl mb-2">🚚</div>
 
                             <h3 className="font-bold">
                                 Frete Grátis
@@ -133,11 +129,8 @@ function Home() {
                             </p>
                         </div>
 
-
                         <div className="text-center p-5">
-                            <div className="text-3xl mb-2">
-                                🛡️
-                            </div>
+                            <div className="text-3xl mb-2">🛡️</div>
 
                             <h3 className="font-bold">
                                 Compra Segura
@@ -148,11 +141,8 @@ function Home() {
                             </p>
                         </div>
 
-
                         <div className="text-center p-5">
-                            <div className="text-3xl mb-2">
-                                🎧
-                            </div>
+                            <div className="text-3xl mb-2">🎧</div>
 
                             <h3 className="font-bold">
                                 Suporte
@@ -163,11 +153,8 @@ function Home() {
                             </p>
                         </div>
 
-
                         <div className="text-center p-5">
-                            <div className="text-3xl mb-2">
-                                ↩️
-                            </div>
+                            <div className="text-3xl mb-2">↩️</div>
 
                             <h3 className="font-bold">
                                 Devolução Fácil

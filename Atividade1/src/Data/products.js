@@ -105,6 +105,15 @@ const products = [
         price: "59,90",
         image: "https://images.unsplash.com/photo-1503341504253-dff4815485f1",
         description: "Camiseta básica para todos os momentos."
+    },
+
+    {
+        id: 13,
+        name: "Tênis Esportivo 2",
+        category: "tenis",
+        price: "399,90",
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+        description: "Tênis esportivo leve e confortável."
     }
 ];
 

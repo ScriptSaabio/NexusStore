@@ -20,92 +20,105 @@ function HeroCarousel({ products }) {
         );
     };
 
+    // Troca automaticamente a cada 4 segundos
     useEffect(() => {
 
         const interval = setInterval(() => {
-            nextImage();
+            setCurrentIndex((prevIndex) =>
+                prevIndex === products.length - 1
+                    ? 0
+                    : prevIndex + 1
+            );
         }, 4000);
 
         return () => clearInterval(interval);
 
     }, [products.length]);
 
-    const product = products[currentIndex];
+    if (!products.length) {
+        return null;
+    }
 
     return (
         <div className="relative w-full max-w-lg">
 
-            <div className="relative h-80 md:h-96 overflow-hidden rounded-2xl shadow-xl bg-white">
+            {/* IMAGEM */}
+
+            <div className="relative h-80 md:h-96 overflow-hidden rounded-2xl">
 
                 <img
-                    key={product.id}
-                    src={product.image}
-                    alt={product.name}
+                    key={products[currentIndex].id}
+                    src={products[currentIndex].image}
+                    alt={products[currentIndex].name}
                     className="w-full h-full object-cover
-                               animate-[fadeIn_0.5s_ease-in-out]"
+                           animate-[fadeIn_0.5s_ease-in-out]"
                 />
 
-                <div className="absolute bottom-0 left-0 right-0
-                                bg-black/60 text-white p-4">
+                {/* SETA ANTERIOR */}
 
-                    <p className="font-bold text-lg">
-                        {product.name}
-                    </p>
+                <button
+                    onClick={previousImage}
+                    aria-label="Imagem anterior"
+                    className="absolute left-3 top-1/2 -translate-y-1/2
+                           w-10 h-10 rounded-full
+                           bg-white/90 text-gray-800 shadow
+                           flex items-center justify-center
+                           transition-all duration-300
+                           hover:bg-blue-600 hover:text-white
+                           hover:scale-110
+                           active:scale-90"
+                >
+                    ←
+                </button>
 
-                    <p className="text-sm text-gray-200">
-                        R$ {product.price}
-                    </p>
+                {/* SETA PRÓXIMA */}
 
-                </div>
+                <button
+                    onClick={nextImage}
+                    aria-label="Próxima imagem"
+                    className="absolute right-3 top-1/2 -translate-y-1/2
+                           w-10 h-10 rounded-full
+                           bg-white/90 text-gray-800 shadow
+                           flex items-center justify-center
+                           transition-all duration-300
+                           hover:bg-blue-600 hover:text-white
+                           hover:scale-110
+                           active:scale-90"
+                >
+                    →
+                </button>
 
             </div>
 
 
-            {/* Botão anterior */}
+            {/* NOME DO PRODUTO */}
 
-            <button
-                onClick={previousImage}
-                className="absolute left-3 top-1/2 -translate-y-1/2
-                           w-10 h-10 rounded-full
-                           bg-white/90 text-gray-800 shadow
-                           transition-all duration-300
-                           hover:bg-blue-600 hover:text-white
-                           hover:scale-110 active:scale-90"
+            <h2
+                key={`name-${products[currentIndex].id}`}
+                className="text-center text-xl md:text-2xl font-bold
+                       text-gray-900 mt-4
+                       animate-[fadeIn_0.5s_ease-in-out]"
             >
-                ←
-            </button>
+                {products[currentIndex].name}
+            </h2>
 
 
-            {/* Botão próximo */}
+            {/* INDICADORES */}
 
-            <button
-                onClick={nextImage}
-                className="absolute right-3 top-1/2 -translate-y-1/2
-                           w-10 h-10 rounded-full
-                           bg-white/90 text-gray-800 shadow
-                           transition-all duration-300
-                           hover:bg-blue-600 hover:text-white
-                           hover:scale-110 active:scale-90"
-            >
-                →
-            </button>
+            <div className="flex justify-center gap-2 mt-4">
 
-
-            {/* Indicadores */}
-
-            <div className="absolute bottom-3 left-1/2
-                            -translate-x-1/2 flex gap-2">
-
-                {products.map((item, index) => (
+                {products.map((product, index) => (
 
                     <button
-                        key={item.id}
+                        key={product.id}
                         onClick={() => setCurrentIndex(index)}
-                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                            index === currentIndex
+                        aria-label={`Ir para imagem ${index + 1}`}
+                        className={`w-2.5 h-2.5 rounded-full
+                        transition-all duration-300
+                        ${index === currentIndex
                                 ? "bg-blue-600 scale-125"
-                                : "bg-white/70"
-                        }`}
+                                : "bg-gray-300 hover:bg-gray-400"
+                            }`}
                     />
 
                 ))}
