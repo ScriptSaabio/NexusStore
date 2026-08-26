@@ -1,44 +1,43 @@
-import { useState } from "react";
-
-function ProductCard({ nome, preco, imagem }) {
-
-    const [quantidade, setQuantidade] = useState(0);
-
-    function adicionar() {
-        setQuantidade(quantidade + 1);
-    }
+function ProductCard({ product }) {
 
     return (
-        <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
+        <div className="group bg-white rounded-xl border border-gray-200 overflow-hidden
+                        transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
 
-            <img
-                src={imagem}
-                alt={nome}
-                className="w-full h-56 object-cover"
-            />
+            <div className="bg-gray-100 overflow-hidden">
+
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-52 object-cover
+                               transition-transform duration-500
+                               group-hover:scale-110"
+                />
+
+            </div>
 
             <div className="p-5">
 
-                <h2 className="text-xl font-bold text-gray-800">
-                    {nome}
-                </h2>
+                <h3 className="text-lg font-bold text-gray-800">
+                    {product.name}
+                </h3>
 
-                <p className="text-green-600 font-bold text-lg mt-2">
-                    R$ {preco}
+                <p className="text-gray-500 text-sm mt-2 min-h-10">
+                    {product.description}
+                </p>
+
+                <p className="text-xl font-bold text-blue-600 mt-4">
+                    R$ {product.price}
                 </p>
 
                 <button
-                    onClick={adicionar}
-                    className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition"
+                    className="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg
+                               transition-all duration-300
+                               hover:bg-blue-700 hover:scale-[1.02]
+                               active:scale-95"
                 >
-                    Adicionar ao carrinho
+                    Comprar
                 </button>
-
-                {quantidade > 0 && (
-                    <p className="text-center mt-3 text-gray-600">
-                        {quantidade} item(ns) no carrinho
-                    </p>
-                )}
 
             </div>
 
