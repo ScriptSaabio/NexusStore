@@ -1,6 +1,9 @@
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import ProductCarousel from "../components/ProductCarousel.jsx";
+import ProductCard from "../components/ProductCard.jsx";
+import HeroCarousel from "../components/HeroCarousel.jsx";
+
 import products from "../Data/products.js";
 
 function Home() {
@@ -20,16 +23,21 @@ function Home() {
                                     flex flex-col md:flex-row
                                     items-center justify-between gap-10">
 
+                        {/* TEXTO */}
+
                         <div className="max-w-xl">
 
                             <p className="text-blue-600 font-semibold mb-3">
                                 NEXUS STORE
                             </p>
 
-                            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
+                            <h1 className="text-4xl md:text-6xl font-bold
+                                           text-gray-900 leading-tight">
+
                                 Shop Your
                                 <br />
                                 Favorites
+
                             </h1>
 
                             <p className="text-gray-600 mt-5 text-lg">
@@ -41,7 +49,8 @@ function Home() {
                                 className="mt-6 bg-blue-600 text-white
                                            px-6 py-3 rounded-lg font-semibold
                                            transition-all duration-300
-                                           hover:bg-blue-700 hover:scale-105
+                                           hover:bg-blue-700
+                                           hover:scale-105
                                            active:scale-95"
                             >
                                 Comprar agora
@@ -49,23 +58,59 @@ function Home() {
 
                         </div>
 
-                        <div className="text-8xl md:text-9xl
-                                        transition-transform duration-500
-                                        hover:scale-110">
-                            🎮
-                        </div>
+
+                        {/* CARROSSEL DE FOTOS */}
+
+                        <HeroCarousel products={products} />
 
                     </div>
 
                 </section>
 
 
-                {/* CARROSSEL */}
+                {/* CARROSSEL DE PRODUTOS */}
 
                 <ProductCarousel
                     products={products}
                     title="Produtos em destaque"
                 />
+
+
+                {/* CARDS DOS PRODUTOS */}
+
+                <section className="max-w-7xl mx-auto px-6 py-10">
+
+                    <div className="flex items-center justify-between mb-8">
+
+                        <div>
+
+                            <h2 className="text-3xl font-bold text-gray-900">
+                                Nossos produtos
+                            </h2>
+
+                            <p className="text-gray-500 mt-2">
+                                Confira alguns dos nossos produtos.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                        {products.slice(0, 8).map((product) => (
+
+                            <ProductCard
+                                key={product.id}
+                                product={product}
+                            />
+
+                        ))}
+
+                    </div>
+
+                </section>
 
 
                 {/* BENEFÍCIOS */}
@@ -75,7 +120,9 @@ function Home() {
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
 
                         <div className="text-center p-5">
-                            <div className="text-3xl mb-2">🚚</div>
+                            <div className="text-3xl mb-2">
+                                🚚
+                            </div>
 
                             <h3 className="font-bold">
                                 Frete Grátis
@@ -86,8 +133,11 @@ function Home() {
                             </p>
                         </div>
 
+
                         <div className="text-center p-5">
-                            <div className="text-3xl mb-2">🛡️</div>
+                            <div className="text-3xl mb-2">
+                                🛡️
+                            </div>
 
                             <h3 className="font-bold">
                                 Compra Segura
@@ -98,8 +148,11 @@ function Home() {
                             </p>
                         </div>
 
+
                         <div className="text-center p-5">
-                            <div className="text-3xl mb-2">🎧</div>
+                            <div className="text-3xl mb-2">
+                                🎧
+                            </div>
 
                             <h3 className="font-bold">
                                 Suporte
@@ -110,8 +163,11 @@ function Home() {
                             </p>
                         </div>
 
+
                         <div className="text-center p-5">
-                            <div className="text-3xl mb-2">↩️</div>
+                            <div className="text-3xl mb-2">
+                                ↩️
+                            </div>
 
                             <h3 className="font-bold">
                                 Devolução Fácil
