@@ -6,4 +6,5 @@ plugins: [
 react(),
 tailwindcss(),
 ],
+  base: '/Atividade1/',
 })
